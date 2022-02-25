@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const computerSelect = computerPlay();
+        console.log(computerSelect);
+
+        const playerSelect = prompt('Choose rock/paper/scissors: ');
+        console.log(playerSelect);
+
+        function computerPlay() {
+            choices = ['rock', 'paper', 'scissors']
+            // choice is made through generating random index for array
+            choice = choices[Math.floor(Math.random()*choices.length)]
+            return choice
+        } 
+        
+        console.log(computerSelect);
+        console.log(playerSelect);
+        
+        function playRound(computerSelect, playerSelect) { 
+
+            if (computerSelect === playerSelect) { 
+                return 'Tie. Try again.' 
+            } else if ((computerSelect === 'rock') && (playerSelect === 'paper')) {
+                console.log(computerSelect);
+                console.log(playerSelect);
+                return 'You won! Paper beats rock.'
+            } else if ((computerSelect === 'rock') && (playerSelect === 'scissors')) {
+                return 'You lose! Rock beats scissors.'
+            } else if ((computerSelect === 'paper') && (playerSelect === 'rock')) {
+                console.log(computerSelect);
+                console.log(playerSelect);
+                return 'You lose! Paper beats rock.'
+            } else if ((computerSelect === 'paper') && (playerSelect === 'scissors')) {
+                return 'You win! Scissors beats paper.'
+            } else if ((computerSelect === 'scissors') && (playerSelect === 'rock')) {
+                return 'You win! Rock beats scissors.'
+            } else if ((computerSelect === 'scissors') && (playerSelect === 'paper')) {
+                return 'You loose! Scissors beats paper.'
+            } else {
+                return 'Please provide valid input.'
+            }
+        } 
+        
+        console.log(playRound(playerSelect, computerSelect));
+
+        function game() {
+            playerWins = 0;
+            computerWins = 0;
+
+            for (let i = 0; i < 5; i++) {
+                result = playRound(computerSelect, playerSelect);
+
+                if (result.includes('You win!')) {
+                    playerWins += 1;
+                } else if (result.includes('You lose!')) {
+                    computerWins += 1;
+                } else {
+                    i--;
+                }
+            }
+
+            if (playerWins > computerWins) {
+                return 'Congratulations! You\'re a winner!';
+            } else {
+                return 'Game over. Computer wins.'
+            }
+        }
+        
+    </script>
+</body>
+</html>
