@@ -8,11 +8,6 @@
 </head>
 <body>
     <script>
-        const computerSelect = computerPlay();
-        console.log(computerSelect);
-
-        const playerSelect = prompt('Choose rock/paper/scissors: ');
-        console.log(playerSelect);
 
         function computerPlay() {
             choices = ['rock', 'paper', 'scissors']
@@ -21,22 +16,15 @@
             return choice
         } 
         
-        console.log(computerSelect);
-        console.log(playerSelect);
-        
-        function playRound(computerSelect, playerSelect) { 
+        function playRound(computerSelect, playerSelect) {
 
             if (computerSelect === playerSelect) { 
                 return 'Tie. Try again.' 
             } else if ((computerSelect === 'rock') && (playerSelect === 'paper')) {
-                console.log(computerSelect);
-                console.log(playerSelect);
-                return 'You won! Paper beats rock.'
+                return 'You win! Paper beats rock.'
             } else if ((computerSelect === 'rock') && (playerSelect === 'scissors')) {
                 return 'You lose! Rock beats scissors.'
             } else if ((computerSelect === 'paper') && (playerSelect === 'rock')) {
-                console.log(computerSelect);
-                console.log(playerSelect);
                 return 'You lose! Paper beats rock.'
             } else if ((computerSelect === 'paper') && (playerSelect === 'scissors')) {
                 return 'You win! Scissors beats paper.'
@@ -48,15 +36,19 @@
                 return 'Please provide valid input.'
             }
         } 
-        
-        console.log(playRound(playerSelect, computerSelect));
+
 
         function game() {
+
             playerWins = 0;
             computerWins = 0;
 
             for (let i = 0; i < 5; i++) {
+
+                const computerSelect = computerPlay();
+                const playerSelect = (prompt('Choose rock/paper/scissors: ')).toLowerCase();
                 result = playRound(computerSelect, playerSelect);
+                console.log(result);
 
                 if (result.includes('You win!')) {
                     playerWins += 1;
@@ -73,7 +65,7 @@
                 return 'Game over. Computer wins.'
             }
         }
-        
+
     </script>
 </body>
 </html>
