@@ -6,39 +6,67 @@ function computerPlay() {
 } 
 
 function playRound(e) {
-    console.log(e);
     computerSelect = computerPlay();
-    console.log(computerSelect);
     const playerSelect = e.target.getAttribute('id');
-    console.log(playerSelect);
 
-    if (computerSelect === playerSelect) { 
-        return 'Tie. Try again.' 
+    if (playerScore === 5) {
+        return alert('you win');
+    } else if (computerScore === 5) {
+        return alert('you lose');
+    } else if (computerSelect === playerSelect) { 
+        return alert('Tie. Try again.'); 
     } else if ((computerSelect === 'rock') && (playerSelect === 'paper')) {
-        return 'You win! Paper beats rock.'
+        playerColumn.textContent += ' 1 ';
+        playerScore += 1;
+        return alert('You win! Paper beats rock.');
     } else if ((computerSelect === 'rock') && (playerSelect === 'scissors')) {
-        return 'You lose! Rock beats scissors.'
+        computerColumn.textContent += ' 1 ';
+        computerScore += 1;
+        return alert('You lose! Rock beats scissors.');
     } else if ((computerSelect === 'paper') && (playerSelect === 'rock')) {
-        return 'You lose! Paper beats rock.'
+        computerColumn.textContent += ' 1 '
+        computerScore += 1;
+        return alert('You lose! Paper beats rock.');
     } else if ((computerSelect === 'paper') && (playerSelect === 'scissors')) {
-        return 'You win! Scissors beats paper.'
+        playerColumn.textContent += ' 1 ';
+        playerScore += 1;
+        return alert('You win! Scissors beats paper.');
     } else if ((computerSelect === 'scissors') && (playerSelect === 'rock')) {
-        return 'You win! Rock beats scissors.'
+        playerColumn.textContent += ' 1 ';
+        playerScore += 1;
+        return alert('You win! Rock beats scissors.');
     } else if ((computerSelect === 'scissors') && (playerSelect === 'paper')) {
-        return 'You lose! Scissors beats paper.'
+        computerColumn.textContent += ' 1 '
+        computerScore += 1;
+        return alert('You lose! Scissors beats paper.');
     } else {
-        return 'Please provide valid input.'
+        return alert('Please provide valid input.');
     }
 } 
 
-const buttons = Array.from(document.querySelectorAll('button')); 
+const playerColumn = document.querySelector('.player'); 
+const computerColumn = document.querySelector('.computer');
+
+let playerScore = 0;
+let computerScore = 0;
+const buttons = Array.from(document.querySelectorAll('button'));
 buttons.forEach(button => button.addEventListener('click', playRound));
 
+/*
+while (!(playerScore === 5) || !(computerScore === 5)) { 
+    switch(roundResult) {
+        case true:
+            playerScore += 1;
+            break;
+        case false:
+            computerScore += 1;
+            break;
+    }
+}
 
 
 
 /*
-
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
