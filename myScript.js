@@ -8,8 +8,14 @@ function computerPlay() {
 function playRound(e) {
     computerSelect = computerPlay();
     const playerSelect = e.target.getAttribute('id');
-
-    if (computerSelect === playerSelect) { 
+    
+    if (playerScore === 5) {
+        e.removeEventListener('click', playRound);
+        return alert('you win');
+    } else if (computerScore === 5) {
+        e.removeEventListener('click', playRound);
+        return alert('you lose');
+    } else if (computerSelect === playerSelect) { 
         return alert('Tie. Try again.'); 
     } else if ((computerSelect === 'rock') && (playerSelect === 'paper')) {
         playerColumn.textContent += ' 1 ';
