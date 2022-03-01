@@ -9,11 +9,7 @@ function playRound(e) {
     computerSelect = computerPlay();
     const playerSelect = e.target.getAttribute('id');
 
-    if (playerScore === 5) {
-        return alert('you win');
-    } else if (computerScore === 5) {
-        return alert('you lose');
-    } else if (computerSelect === playerSelect) { 
+    if (computerSelect === playerSelect) { 
         return alert('Tie. Try again.'); 
     } else if ((computerSelect === 'rock') && (playerSelect === 'paper')) {
         playerColumn.textContent += ' 1 ';
@@ -52,6 +48,16 @@ let computerScore = 0;
 const buttons = Array.from(document.querySelectorAll('button'));
 buttons.forEach(button => button.addEventListener('click', playRound));
 
+
+/* Doesn't work...
+
+if (playerScore === 5) {
+    buttons.removeEventListener('click', playRound);
+    alert('you win');
+} else if (computerScore === 5) {
+    buttons.removeEventListener('click', playRound);
+    alert('you lose');
+}
 /*
 while (!(playerScore === 5) || !(computerScore === 5)) { 
     switch(roundResult) {
