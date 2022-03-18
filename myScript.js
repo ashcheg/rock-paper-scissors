@@ -6,7 +6,7 @@ function computerPlay() {
 } 
 
 function disableButtons() {
-    buttons.froEach(button => {
+    buttons.forEach(button => {
         button.disabled = true
     })
 }
@@ -15,29 +15,34 @@ function playRound(e) {
     let computerSelect = computerPlay();
     let playerSelect = e.target.getAttribute('id');
     
-    if (playerScore === 5) {
-        disableButtons();
-        return alert('you win');
-    } else if (computerScore === 5) {
-        disableButtons();
-        return alert('you lose');
-    } else if (computerSelect === playerSelect) { 
-        return alert('Tie. Try again.'); 
+    if (computerSelect === playerSelect) { 
+        result.textContent = `Tie. You both chose ${computerSelect}.`;
+        score.textContent = `You: ${playerScore} Computer: ${computerScore}.`;
+        return; 
     } else if ((computerSelect === 'rock' && playerSelect === 'paper') || 
     (computerSelect === 'scissors' && playerSelect === 'rock') || 
     (computerSelect === 'paper' && playerSelect === 'scissors')) {
-        playerColumn.textContent += ' 1 ';
         playerScore += 1;
-        return alert(`You win! ${playerSelect} beats ${computerSelect}.`);
+        result.textContent = `You win! ${playerSelect} beats ${computerSelect}.`;
+        score.textContent = `You: ${playerScore} Computer: ${computerScore}.`;
+        if (playerScore === 5) {
+            disableButtons();
+            result.textContent += ` You're a winner!`;
+        } 
     } else {
-        computerColumn.textContent += ' 1 ';
         computerScore += 1;
-        return alert(`You lose! ${computerSelect} beats ${playerSelect}.`);
+        result.textContent = `You lose! ${computerSelect} beats ${playerSelect}.`;
+        score.textContent = `You: ${playerScore} Computer: ${computerScore}.`;
+        if (computerScore === 5) {
+            disableButtons();
+            result.textContent += ` Computer won!`;
+            score.textContent = `You: ${playerScore} Computer: ${computerScore}.`;
+        } 
+    }
 } 
 
-const playerColumn = document.querySelector('.player'); 
-const computerColumn = document.querySelector('.computer');
-
+const score = document.querySelector('.score'); 
+const result = document.querySelector('.result');
 let playerScore = 0;
 let computerScore = 0;
 const buttons = Array.from(document.querySelectorAll('button'));
