@@ -5,45 +5,34 @@ function computerPlay() {
     return choice
 } 
 
+function disableButtons() {
+    buttons.froEach(button => {
+        button.disabled = true
+    })
+}
+
 function playRound(e) {
-    computerSelect = computerPlay();
-    const playerSelect = e.target.getAttribute('id');
+    let computerSelect = computerPlay();
+    let playerSelect = e.target.getAttribute('id');
     
     if (playerScore === 5) {
-        e.removeEventListener('click', playRound);
+        disableButtons();
         return alert('you win');
     } else if (computerScore === 5) {
-        e.removeEventListener('click', playRound);
+        disableButtons();
         return alert('you lose');
     } else if (computerSelect === playerSelect) { 
         return alert('Tie. Try again.'); 
-    } else if ((computerSelect === 'rock') && (playerSelect === 'paper')) {
+    } else if ((computerSelect === 'rock' && playerSelect === 'paper') || 
+    (computerSelect === 'scissors' && playerSelect === 'rock') || 
+    (computerSelect === 'paper' && playerSelect === 'scissors')) {
         playerColumn.textContent += ' 1 ';
         playerScore += 1;
-        return alert('You win! Paper beats rock.');
-    } else if ((computerSelect === 'rock') && (playerSelect === 'scissors')) {
+        return alert(`You win! ${playerSelect} beats ${computerSelect}.`);
+    } else {
         computerColumn.textContent += ' 1 ';
         computerScore += 1;
-        return alert('You lose! Rock beats scissors.');
-    } else if ((computerSelect === 'paper') && (playerSelect === 'rock')) {
-        computerColumn.textContent += ' 1 '
-        computerScore += 1;
-        return alert('You lose! Paper beats rock.');
-    } else if ((computerSelect === 'paper') && (playerSelect === 'scissors')) {
-        playerColumn.textContent += ' 1 ';
-        playerScore += 1;
-        return alert('You win! Scissors beats paper.');
-    } else if ((computerSelect === 'scissors') && (playerSelect === 'rock')) {
-        playerColumn.textContent += ' 1 ';
-        playerScore += 1;
-        return alert('You win! Rock beats scissors.');
-    } else if ((computerSelect === 'scissors') && (playerSelect === 'paper')) {
-        computerColumn.textContent += ' 1 '
-        computerScore += 1;
-        return alert('You lose! Scissors beats paper.');
-    } else {
-        return alert('Please provide valid input.');
-    }
+        return alert(`You lose! ${computerSelect} beats ${playerSelect}.`);
 } 
 
 const playerColumn = document.querySelector('.player'); 
