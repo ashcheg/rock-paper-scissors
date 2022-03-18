@@ -5,12 +5,14 @@ function computerPlay() {
     return choice
 } 
 
+// disable buttons when the game is over
 function disableButtons() {
     buttons.forEach(button => {
         button.disabled = true
     })
 }
 
+// the main game function
 function playRound(e) {
     let computerSelect = computerPlay();
     let playerSelect = e.target.getAttribute('id');
@@ -25,6 +27,8 @@ function playRound(e) {
         playerScore += 1;
         result.textContent = `You win! ${playerSelect} beats ${computerSelect}.`;
         score.textContent = `You: ${playerScore} Computer: ${computerScore}.`;
+        
+        //check if the game is over 
         if (playerScore === 5) {
             disableButtons();
             result.textContent += ` You're a winner!`;
@@ -33,6 +37,8 @@ function playRound(e) {
         computerScore += 1;
         result.textContent = `You lose! ${computerSelect} beats ${playerSelect}.`;
         score.textContent = `You: ${playerScore} Computer: ${computerScore}.`;
+
+        //check if the game is over 
         if (computerScore === 5) {
             disableButtons();
             result.textContent += ` Computer won!`;
